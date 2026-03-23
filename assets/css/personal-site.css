@@ -367,6 +367,20 @@ html[data-theme="dark"] .note-box {
   background: rgba(79, 208, 190, 0.1);
 }
 
+.profile-figure {
+  display: flex;
+  justify-content: center;
+  margin: 0 0 1rem;
+}
+
+.profile-photo {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid var(--personal-border);
+}
+
 @keyframes rise-up {
   from {
     opacity: 0;
