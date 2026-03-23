@@ -108,6 +108,13 @@ html[data-theme="dark"] .paper-thumb {
   background: linear-gradient(160deg, rgba(24, 40, 39, 0.96), rgba(21, 28, 33, 0.94));
 }
 
+.thumb-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+}
+
 .publication-thumb::after {
   content: "";
   position: absolute;
@@ -367,18 +374,24 @@ html[data-theme="dark"] .note-box {
   background: rgba(79, 208, 190, 0.1);
 }
 
-.profile-figure {
+.hero-panel--photo-only {
   display: flex;
-  justify-content: center;
-  margin: 0 0 1rem;
+  align-items: stretch;
+  padding: 0;
+  overflow: hidden;
+}
+
+.hero-panel--photo-only .profile-figure {
+  width: 100%;
+  height: 100%;
+  margin: 0;
 }
 
 .profile-photo {
-  width: 180px;
-  height: 180px;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  border-radius: 50%;
-  border: 3px solid var(--personal-border);
+  border-radius: inherit;
 }
 
 @keyframes rise-up {
@@ -425,4 +438,9 @@ html[data-theme="dark"] .note-box {
 .card-actions .btn-personal-muted {
   min-height: 2.35rem;
   padding: 0.55rem 0.95rem;
+}
+
+.publication-stack + .section-block,
+.section-block + .section-block {
+  margin-top: 3rem;
 }
