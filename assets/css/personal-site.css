@@ -379,6 +379,7 @@ html[data-theme="dark"] .note-box {
   align-items: stretch;
   padding: 0;
   overflow: hidden;
+  border-radius: 24px;
 }
 
 .hero-panel--photo-only .profile-figure {
@@ -388,10 +389,12 @@ html[data-theme="dark"] .note-box {
 }
 
 .profile-photo {
+  display: block;
   width: 100%;
   height: 100%;
+  min-height: 360px;
   object-fit: cover;
-  border-radius: inherit;
+  border-radius: 0 !important;
 }
 
 @keyframes rise-up {
