@@ -44,5 +44,11 @@
         </div>
       </div>
     </div>
+    <script>
+      document.querySelectorAll('video').forEach(function (v) {
+        v.muted = true;
+        v.addEventListener('volumechange', function () { v.muted = true; });
+      });
+    </script>
   </body>
 </html>
