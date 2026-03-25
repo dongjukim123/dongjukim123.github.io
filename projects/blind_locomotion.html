@@ -8,37 +8,127 @@
     <link rel="stylesheet" href="/assets/css/main.css">
     <link rel="stylesheet" href="/assets/css/personal-site.css">
     <style>
-      .video-grid { display: flex; flex-direction: column; gap: 2rem; max-width: 800px; margin: 0 auto; }
-      .video-item h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
-      .video-item video { width: 100%; border-radius: 12px; }
+      .robot-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1.5rem;
+        margin-top: 2rem;
+      }
+      .robot-card {
+        border: 1px solid var(--global-divider-color, #dee2e6);
+        border-radius: 12px;
+        overflow: hidden;
+        cursor: pointer;
+        transition: box-shadow 0.2s ease, transform 0.2s ease;
+        background: var(--global-bg-color, #fff);
+      }
+      .robot-card:hover {
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+        transform: translateY(-2px);
+      }
+      .robot-card img {
+        width: 100%;
+        aspect-ratio: 16 / 10;
+        object-fit: cover;
+      }
+      .robot-card .card-label {
+        padding: 0.75rem 1rem;
+        font-weight: 600;
+        font-size: 1rem;
+      }
+      .robot-card .card-desc {
+        padding: 0 1rem 0.75rem;
+        font-size: 0.85rem;
+        color: var(--global-text-color-light, #6c757d);
+      }
+      .video-overlay {
+        display: none;
+        margin-top: 1rem;
+        padding: 0 1rem 1rem;
+      }
+      .video-overlay.active {
+        display: block;
+      }
+      .video-overlay video {
+        width: 100%;
+        border-radius: 8px;
+      }
     </style>
   </head>
   <body>
     <div class="container mt-5" style="padding-top: 60px;">
-      <a href="/projects/">&larr; Back to projects</a>
+      <a href="/projects/">&larr; Back to Projects</a>
       <h1 style="margin-top: 1rem;">Blind Locomotion on Various Quadruped Robots</h1>
-      <div class="video-grid" style="margin-top: 2rem;">
-        <div class="video-item">
-          <h3>RBQ10</h3>
-          <video controls muted preload="metadata">
-            <source src="/assets/video/blind/rbq_real_blind.mp4" type="video/mp4">
-          </video>
+      <p style="color: var(--global-text-color-light, #6c757d); margin-top: 0.5rem;">
+        Click on a robot to view the blind locomotion demo video.
+      </p>
+
+      <div class="robot-grid">
+        <div class="robot-card" onclick="toggleVideo(this)">
+          <img src="/assets/img/Personal_Projects/wtw.png" alt="Unitree Go2">
+          <div class="card-label">Unitree Go2</div>
+          <div class="card-desc">Walk These Ways open-source framework deployment</div>
+          <div class="video-overlay">
+            <video controls muted preload="none">
+              <source src="/assets/video/wtw/wtw.mp4" type="video/mp4">
+            </video>
+          </div>
         </div>
-        <div class="video-item">
-          <h3>Unitree B2</h3>
-          <video controls muted preload="metadata">
-            <source src="/assets/video/blind/b2_blind.mp4" type="video/mp4">
-          </video>
+
+        <div class="robot-card" onclick="toggleVideo(this)">
+          <img src="/assets/img/Personal_Projects/unitreeb2.png" alt="RBQ10">
+          <div class="card-label">RBQ10</div>
+          <div class="card-desc">Proprioceptive RL locomotion policy</div>
+          <div class="video-overlay">
+            <video controls muted preload="none">
+              <source src="/assets/video/blind/rbq_real_blind.mp4" type="video/mp4">
+            </video>
+          </div>
         </div>
-        <div class="video-item">
-          <h3>CANINE</h3>
-          <video controls muted preload="metadata">
-            <source src="/assets/video/blind/canine.mp4" type="video/mp4">
-          </video>
+
+        <div class="robot-card" onclick="toggleVideo(this)">
+          <img src="/assets/img/Personal_Projects/unitreeb2.png" alt="Unitree B2">
+          <div class="card-label">Unitree B2</div>
+          <div class="card-desc">Proprioceptive RL locomotion policy</div>
+          <div class="video-overlay">
+            <video controls muted preload="none">
+              <source src="/assets/video/blind/b2_blind.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+
+        <div class="robot-card" onclick="toggleVideo(this)">
+          <img src="/assets/img/Personal_Projects/unitreeb2.png" alt="CANINE">
+          <div class="card-label">CANINE</div>
+          <div class="card-desc">Proprioceptive RL locomotion policy</div>
+          <div class="video-overlay">
+            <video controls muted preload="none">
+              <source src="/assets/video/blind/canine.mp4" type="video/mp4">
+            </video>
+          </div>
         </div>
       </div>
     </div>
+
     <script>
+      function toggleVideo(card) {
+        var overlay = card.querySelector('.video-overlay');
+        var video = overlay.querySelector('video');
+        var isActive = overlay.classList.contains('active');
+
+        // Close all other videos
+        document.querySelectorAll('.video-overlay.active').forEach(function (el) {
+          el.classList.remove('active');
+          el.querySelector('video').pause();
+        });
+
+        if (!isActive) {
+          overlay.classList.add('active');
+          video.play();
+        }
+      }
+
+      // Force mute on all videos
       document.querySelectorAll('video').forEach(function (v) {
         v.muted = true;
         v.addEventListener('volumechange', function () { v.muted = true; });
